@@ -1,14 +1,44 @@
-import Title from '@/components/Title';
+import Header from '@/components/Header';
+import PokemonTable from '@/components/PokemonTable';
+import { PokemonTableData } from '@/interfaces/Interfaces';
+import { useEffect, useState } from 'react';
+import './index.scss';
 
-export default function Home() {
+const App = () => {
+  const [loading, setLoading] = useState<Boolean>(false);
+  const [tableData, setTableData] = useState<PokemonTableData>({
+    count: 0,
+    next: ``,
+    previous: ``,
+    results: [],
+  });
+
+  useEffect(() => {
+    setLoading(true);
+    fetch(`https://pokeapi.co/api/v2/pokemon/?limit=20`)
+      .then((res) => res.json())
+      .then((result) => {
+        setLoading(false);
+        setTableData(result);
+      })
+      .catch((error) => {
+        setLoading(false);
+        setTableData(error);
+      });
+  }, []);
+
   return (
-    <main>
-      <Title>Hello TypeScript!</Title>
-      <p>A TypeScript starter for Gatsby. Great for advanced users.</p>
-      <p>
-        Follow me on Twitter (
-        <a href="https://twitter.com/jpedroschmitz">@jpedroschmitz</a>)
-      </p>
-    </main>
+    <div>
+      <Header />
+      <main>
+        {loading ? (
+          <div>Loading...</div>
+        ) : (
+          <PokemonTable tableData={tableData} />
+        )}
+      </main>
+    </div>
   );
-}
+};
+
+export default App;

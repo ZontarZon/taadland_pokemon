@@ -17,6 +17,7 @@ const config: GatsbyConfig = {
       },
     },
     `gatsby-plugin-offline`,
+    `gatsby-plugin-sass`,
   ],
   jsxRuntime: `automatic`,
 };

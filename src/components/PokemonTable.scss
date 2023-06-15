@@ -1,0 +1,52 @@
+%pokemon_table_gridlayout {
+  display: grid;
+  grid-template-columns: 30px calc((100% - 130px) / 2) calc((100% - 130px) / 2) 100px;
+  align-items: center;
+  margin: 0px auto 10px auto;
+  max-width: 400px;
+}
+
+#pokemon_list_hr {
+  @extend %pokemon_table_gridlayout;
+  font-weight: bold;
+}
+
+.pokemon_table_entry_container {
+  max-width: 400px;
+  padding: 10px 10px 20px 10px;
+  margin: auto auto 15px auto;
+  border-radius: 15px;
+  background-color: white;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.pokemon_table_entry_data {
+  @extend %pokemon_table_gridlayout;
+
+  .pokemon_name {
+    text-transform: capitalize;
+  }
+
+  .pokemon_sprite_img {
+    margin: auto;
+    background-color: rgb(236, 236, 236);
+    border-radius: 50%;
+  }
+}
+
+#hr_fixed_true {
+  width: 100%;
+  position: fixed;
+  top: 0px;
+  background-color: white;
+  padding: 10px 0px 0px 0px;
+  border-bottom: 2px solid gray;
+
+  #pokemon_list_hr {
+    @extend %pokemon_table_gridlayout;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
