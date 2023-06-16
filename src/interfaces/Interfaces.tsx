@@ -39,7 +39,7 @@ export interface PokemonTyping {
  * Every pokemon has at least one ability.
  */
 export interface PokemonAbilities {
-  ability: PokemonDataNameAndUrl[];
+  ability: PokemonDataNameAndUrl;
   is_hidden: boolean;
   slot: number;
 }
@@ -49,17 +49,17 @@ export interface PokemonAbilities {
  */
 export interface PokemonGameIndices {
   game_index: number;
-  version: PokemonDataNameAndUrl[];
+  version: PokemonDataNameAndUrl;
 }
 
 /**
  * Pokemon are not guaranteed to have held items.
  */
 export interface PokemonHeldItems {
-  item: PokemonDataNameAndUrl[];
+  item: PokemonDataNameAndUrl;
   version_details: {
     rarity: number;
-    version: PokemonDataNameAndUrl[];
+    version: PokemonDataNameAndUrl;
   }[];
 }
 
@@ -67,21 +67,21 @@ export interface PokemonHeldItems {
  * Every pokemon has at least one move to use in battle.
  */
 export interface PokemonMoves {
-  move: PokemonDataNameAndUrl[];
+  move: PokemonDataNameAndUrl;
   version_group_details: {
     level_learned_at: number;
-    move_learn_method: PokemonDataNameAndUrl[];
-    version_group: PokemonDataNameAndUrl[];
+    move_learn_method: PokemonDataNameAndUrl;
+    version_group: PokemonDataNameAndUrl;
   }[];
 }
 
 export interface PokemonPastAbilities {}
 
 export interface PokemonPastTypes {
-  generation: PokemonDataNameAndUrl[];
+  generation: PokemonDataNameAndUrl;
   types: {
     slot: number;
-    type: PokemonDataNameAndUrl[];
+    type: PokemonDataNameAndUrl;
   }[];
 }
 
@@ -99,18 +99,18 @@ export interface PokemonSprites {
 export interface PokemonStats {
   base_stat: number;
   effort: number;
-  stat: PokemonDataNameAndUrl[];
+  stat: PokemonDataNameAndUrl;
 }
 
 export interface PokemonTypes {
   slot: number;
-  type: PokemonDataNameAndUrl[];
+  type: PokemonDataNameAndUrl;
 }
 
 export interface PokemonDetailedInfo {
   abilities: PokemonAbilities[];
   base_experience: number;
-  forms: PokemonDataNameAndUrl[];
+  forms: PokemonDataNameAndUrl | null;
   game_indices: PokemonGameIndices[];
   height: number;
   held_items: PokemonHeldItems[];
@@ -122,8 +122,8 @@ export interface PokemonDetailedInfo {
   order: number;
   past_abilities: PokemonPastAbilities[];
   past_types: PokemonPastTypes[];
-  species: PokemonDataNameAndUrl[];
-  sprites: PokemonSprites[];
+  species: PokemonDataNameAndUrl | null;
+  sprites: PokemonSprites | null;
   stats: PokemonStats[];
   types: PokemonTypes[];
   weight: number;

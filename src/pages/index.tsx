@@ -19,6 +19,7 @@ const App = () => {
     results: [],
   });
   const [limitPerPage, setLimitPerPage] = useState<string | number>(20);
+  const [error, setError] = useState<{ message: string }>({ message: `` });
 
   /**
    * fetchNewTableData will fetch from the pokemon api and pass in the current
@@ -42,7 +43,7 @@ const App = () => {
       })
       .catch((error) => {
         setLoading(false);
-        setTableData(error);
+        setError(error);
       });
   };
 
@@ -83,6 +84,12 @@ const App = () => {
       <main>
         {loading ? (
           <div>Loading...</div>
+        ) : error.message ? (
+          <div>
+            An error occurred. Please try again later.
+            <br />
+            {error.message}
+          </div>
         ) : (
           <div>
             <div id="navigate_table_btns">
