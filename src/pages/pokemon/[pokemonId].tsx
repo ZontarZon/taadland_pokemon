@@ -1,4 +1,6 @@
+import Footer from '@/components/Footer';
 import Header from '@/components/Header';
+import PokemonStatsChart from '@/components/PokemonStatsChart';
 import { PokemonDetailedInfo } from '@/interfaces/Interfaces';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -6,7 +8,6 @@ import { Chart as ChartJS, registerables } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Link } from 'gatsby';
 import { useEffect, useState } from 'react';
-import { Chart } from 'react-chartjs-2';
 import './pokemon.scss';
 ChartJS.register(ChartDataLabels);
 ChartJS.register(...registerables);
@@ -28,7 +29,27 @@ const PokemonInfo = (props: { params: { pokemonId: number | string } }) => {
     id: 0,
     is_default: false,
     location_area_encounters: ``,
-    moves: [],
+    moves: [
+      {
+        move: {
+          name: ``,
+          url: ``,
+        },
+        version_group_details: [
+          {
+            level_learned_at: 0,
+            move_learn_method: {
+              name: ``,
+              url: ``,
+            },
+            version_group: {
+              name: ``,
+              url: ``,
+            },
+          },
+        ],
+      },
+    ],
     name: ``,
     order: 0,
     past_abilities: [],
@@ -110,7 +131,7 @@ const PokemonInfo = (props: { params: { pokemonId: number | string } }) => {
         setError(error);
       });
   }, []);
-  console.log(pokemonData.types);
+
   return (
     <div>
       <Header />
@@ -150,69 +171,38 @@ const PokemonInfo = (props: { params: { pokemonId: number | string } }) => {
               />
             </div>
           </div>
-          <div id="stats_chart_container">
-            <Chart
-              type="bar"
-              options={{
-                maintainAspectRatio: false,
-                scales: {
-                  yAxis: {
-                    min: 0,
-                    max: 255,
-                    beginAtZero: true,
-                  },
-                  y: {
-                    display: false,
-                  },
-                },
-                plugins: {
-                  title: {
-                    display: true,
-                    text: `Pokemon Stats`,
-                  },
-                  legend: {
-                    display: false,
-                  },
-                  datalabels: {
-                    display: true,
-                    color: `black`,
-                  },
-                },
-              }}
-              data={{
-                datasets: [
-                  {
-                    data: [
-                      pokemonData.stats[0].base_stat,
-                      pokemonData.stats[1].base_stat,
-                      pokemonData.stats[2].base_stat,
-                      pokemonData.stats[3].base_stat,
-                      pokemonData.stats[4].base_stat,
-                      pokemonData.stats[5].base_stat,
-                    ],
-                    backgroundColor: [
-                      `rgb(220, 92, 230)`,
-                      `rgb(255, 99, 132)`,
-                      `rgb(35, 150, 250)`,
-                      `rgb(252, 186, 3)`,
-                      `rgb(92, 230, 110)`,
-                      `rgb(152, 103, 230)`,
-                    ],
-                  },
-                ],
-                labels: [
-                  pokemonData.stats[0].stat.name,
-                  pokemonData.stats[1].stat.name,
-                  pokemonData.stats[2].stat.name,
-                  pokemonData.stats[3].stat.name,
-                  pokemonData.stats[4].stat.name,
-                  pokemonData.stats[5].stat.name,
-                ],
-              }}
-            />
+
+          <PokemonStatsChart pokemonData={pokemonData} />
+          <div className="info_container">
+            <div className="move_row_hr">
+              <p>Move Name</p>
+              <p>Level Earned</p>
+              <p>Method</p>
+            </div>
+            {pokemonData.moves.map((value, id) => {
+              console.log(value);
+              return (
+                <div className="move_row" key={id}>
+                  <p>{value.move.name}</p>
+                  {value.version_group_details[0].level_learned_at ? (
+                    <p>{value.version_group_details[0].level_learned_at}</p>
+                  ) : (
+                    <p />
+                  )}
+                  {value.version_group_details[0].move_learn_method.name ? (
+                    <p>
+                      {value.version_group_details[0].move_learn_method.name}
+                    </p>
+                  ) : (
+                    <p />
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
       )}
+      <Footer />
     </div>
   );
 };

@@ -9,6 +9,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import { useEffect, useState } from 'react';
 
+import Footer from '@/components/Footer';
 import './index.scss';
 const App = () => {
   const [loading, setLoading] = useState<Boolean>(false);
@@ -158,6 +159,7 @@ const App = () => {
           </div>
         )}
       </main>
+      <Footer />
     </div>
   );
 };
