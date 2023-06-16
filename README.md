@@ -4,8 +4,8 @@
 
 <br />
 
-<div align="center"><strong>Non-opinionated TypeScript starter for Gatsby</strong></div>
-<div align="center">A TypeScript starter for Gatsby. No plugins and styling. Exactly the necessary to start.</div>
+<div align="center"><strong>Toto's PokeDex</strong></div>
+<div align="center">A TypeScript/Gatsby PWA for looking up pokemon info.</div>
 
 <br />
 
@@ -20,7 +20,7 @@
 </div>
 
 <div align="center">
-  <sub>Created by <a href="https://twitter.com/jpedroschmitz">João Pedro</a> with the help of many <a href="https://github.com/jpedroschmitz/gatsby-starter-ts/graphs/contributors">wonderful contributors</a>.</sub>
+  <sub>The base starter kit was created by <a href="https://twitter.com/jpedroschmitz">João Pedro</a> with the help of many <a href="https://github.com/jpedroschmitz/gatsby-starter-ts/graphs/contributors">wonderful contributors</a>.</sub>
 </div>
 
 <br />
@@ -41,17 +41,14 @@
 - ⚙️ EditorConfig - Consistent coding styles across editors and IDEs
 - 🗂 Path Mapping — Import components or images using the `@` prefix
 
-## Quick Start
+### Requirements
 
-The best way to start with this template is using the [Gatsby CLI](https://www.gatsbyjs.com/docs/reference/gatsby-cli/).
+- Node.js >= 18
+- npm 7
 
-```
-npx gatsby new starter-ts https://github.com/jpedroschmitz/gatsby-starter-ts
-```
+### Running the app
 
-### Development
-
-To start the project locally, run:
+To start the project locally, cd into the directory and run:
 
 ```bash
 npm start
@@ -59,12 +56,15 @@ npm start
 
 Open `http://localhost:8000` with your browser to see the result.
 
-## Documentation
+To view this project on your mobile device, run this while the project is
+running locally:
 
-### Requirements
+```bash
+ifconfig
+```
 
-- Node.js >= 18
-- npm 7
+In the list, find your network's public broadcast (192.168.1.xxx) and visit
+192.168.1.xxx:8000 on your mobile device.
 
 ### Directory Structure
 
@@ -84,18 +84,7 @@ Open `http://localhost:8000` with your browser to see the result.
 - `npm lint` — Runs ESLint for all files in the `src` directory.
 - `npm format` — Runs Prettier for all files in the `src` directory.
 - `npm test` — Run tests with Vitest.
-- `npm test:watch` — Run tests on watch mode.
-
-### Path Mapping
-
-TypeScript are pre-configured with custom path mappings. To import components or files, use the `@` prefix.
-
-```tsx
-import { Button } from '@/components/Button';
-
-// To import images or other files from the static folder
-import avatar from '@/static/avatar.png';
-```
+- `npm run test:watch` — Run tests on watch mode.
 
 ## License
 
