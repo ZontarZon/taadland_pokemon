@@ -75,8 +75,6 @@ export interface PokemonMoves {
   }[];
 }
 
-export interface PokemonPastAbilities {}
-
 export interface PokemonPastTypes {
   generation: PokemonDataNameAndUrl;
   types: {
@@ -120,7 +118,7 @@ export interface PokemonDetailedInfo {
   moves: PokemonMoves[];
   name: string;
   order: number;
-  past_abilities: PokemonPastAbilities[];
+  past_abilities: PokemonAbilities[];
   past_types: PokemonPastTypes[];
   species: PokemonDataNameAndUrl | null;
   sprites: PokemonSprites | null;

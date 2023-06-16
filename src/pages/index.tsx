@@ -1,3 +1,4 @@
+import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import PokemonTable from '@/components/PokemonTable';
 import { PokemonTableData } from '@/interfaces/Interfaces';
@@ -8,9 +9,8 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import { useEffect, useState } from 'react';
-
-import Footer from '@/components/Footer';
 import './index.scss';
+
 const App = () => {
   const [loading, setLoading] = useState<Boolean>(false);
   const [tableData, setTableData] = useState<PokemonTableData>({
