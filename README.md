@@ -1,22 +1,10 @@
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/26466516/169722691-77a6ca86-df54-4a0e-b952-48c3f3ed7526.png" alt="Gatsby TypeScript Starter">
-</p>
-
-<br />
-
 <div align="center"><strong>Toto's PokeDex</strong></div>
 <div align="center">A TypeScript/Gatsby PWA for looking up pokemon info.</div>
 
 <br />
 
 <div align="center">
-  <img src="https://img.shields.io/static/v1?label=PRs&message=welcome&style=flat-square&color=5e17eb&labelColor=000000" alt="PRs welcome!" />
-
   <img alt="License" src="https://img.shields.io/github/license/jpedroschmitz/gatsby-starter-ts?style=flat-square&color=5e17eb&labelColor=000000">
-
-  <a href="https://twitter.com/intent/follow?screen_name=jpedroschmitz">
-    <img src="https://img.shields.io/twitter/follow/jpedroschmitz?style=flat-square&color=5e17eb&labelColor=000000" alt="Follow @jpedroschmitz" />
-  </a>
 </div>
 
 <div align="center">
@@ -68,11 +56,10 @@ In the list, find your network's public broadcast (192.168.1.xxx) and visit
 
 ### Directory Structure
 
-- [`__helpers__`](./__helpers__/) — Helpers files for testing configuration.<br>
-- [`__mocks__`](./__mocks__/) — Mocks for testing.<br>
-- [`.github`](.github) — GitHub configuration including the CI workflow.<br>
-- [`.husky`](.husky) — Husky configuration and hooks.<br>
 - [`src`](./src) — Application source code, including pages, components, styles.
+- [`src/components`](./src/components) — Components included in the pages.
+- [`src/interfaces`](./src/interfaces) — Typescript interfaces, for reading the expected structure of data.
+- [`src/pages`](./src/pages) — Gatsby auto-generates html pages and their routes based on the directories and tsx files inside.
 
 ### Scripts
 
