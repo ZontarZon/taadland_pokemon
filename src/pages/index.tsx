@@ -94,17 +94,6 @@ const App = () => {
         ) : (
           <div>
             <div id="navigate_table_btns">
-              <button
-                className="link_button"
-                onClick={() => {
-                  if (tableData && tableData.next) {
-                    fetchNewTableData(false, true);
-                  }
-                }}
-              >
-                <FontAwesomeIcon icon={faArrowLeft} /> Previous Page
-              </button>
-
               <FormControl sx={{ m: 1, minWidth: 150 }}>
                 <InputLabel id="demo-simple-select-helper-label">
                   Sort Names...
@@ -143,7 +132,16 @@ const App = () => {
                   <MenuItem value={50}>50</MenuItem>
                 </Select>
               </FormControl>
-
+              <button
+                className="link_button"
+                onClick={() => {
+                  if (tableData && tableData.next) {
+                    fetchNewTableData(false, true);
+                  }
+                }}
+              >
+                <FontAwesomeIcon icon={faArrowLeft} /> Previous Page
+              </button>
               <button
                 className="link_button"
                 onClick={() => {

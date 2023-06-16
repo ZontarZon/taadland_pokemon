@@ -14,10 +14,19 @@ html {
 }
 
 #navigate_table_btns {
-  display: flex;
+  display: grid;
   align-items: center;
-  height: 30px;
-  width: 100%;
+  grid-template-columns: auto auto;
+  height: fit-content;
+  width: fit-content;
+  margin: auto;
   justify-content: space-between;
   margin-bottom: 25px;
+  grid-gap: 15px;
+}
+
+@media screen and (max-width: 380px) {
+  #navigate_table_btns {
+    grid-template-columns: auto;
+  }
 }

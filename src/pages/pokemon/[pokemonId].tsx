@@ -4,13 +4,10 @@ import PokemonStatsChart from '@/components/PokemonStatsChart';
 import { PokemonDetailedInfo } from '@/interfaces/Interfaces';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Chart as ChartJS, registerables } from 'chart.js';
-import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Link } from 'gatsby';
 import { useEffect, useState } from 'react';
 import './pokemon.scss';
-ChartJS.register(ChartDataLabels);
-ChartJS.register(...registerables);
+
 /**
  * PokemonInfo
  * @param props PokemonID, the integer of the pokemon's id.
