@@ -4,6 +4,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'gatsby';
 import { useEffect, useRef, useState } from 'react';
 import './PokemonTable.scss';
+
+/**
+ * PokemonRow Is used to display information for a single pokemon in the table
+ * of pokemon.
+ * @param props The name and url of the pokemon
+ * @returns {html} A div containing the id, name, types, and sprite of the
+ * pokemon.
+ */
 const PokemonRow = (props: { name: string; url: string }) => {
   const [sprite, setSprite] = useState<String>(``);
   const [types, setTypes] = useState<PokemonTyping>({
@@ -12,7 +20,11 @@ const PokemonRow = (props: { name: string; url: string }) => {
   });
   const [id, setId] = useState<number>(0);
 
-  async function getSpriteBasicInfo() {
+  /**
+   * getPokemonBasicInfo will fetch the id, types, and sprite of the pokemon
+   * for display in the table row.
+   */
+  async function getPokemonBasicInfo() {
     const response = await fetch(props.url);
     const results = await response.json();
     console.log(results);
@@ -31,7 +43,7 @@ const PokemonRow = (props: { name: string; url: string }) => {
   }
 
   useEffect(() => {
-    getSpriteBasicInfo();
+    getPokemonBasicInfo();
   }, [props.name]);
 
   return (
@@ -69,6 +81,11 @@ const PokemonTable = (props: { tableData: PokemonTableData }) => {
   const TableHrRef = useRef(null);
   const [HrFixed, setHrFixed] = useState<Boolean>(false);
 
+  /**
+   * stickHr will set the table header row to relative or fixed, depending
+   * on how far the user has scrolled down the page.
+   * @returns null, sets HrFixed.
+   */
   const stickHr = () => {
     if (window !== undefined) {
       if (TableHrRef === null || !TableHrRef.current) return;
@@ -80,6 +97,7 @@ const PokemonTable = (props: { tableData: PokemonTableData }) => {
     }
   };
 
+  // this prevents continuous firing.
   useEffect(() => {
     window.addEventListener(`scroll`, stickHr, true);
     return () => {
