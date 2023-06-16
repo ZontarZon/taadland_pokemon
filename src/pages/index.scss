@@ -10,4 +10,14 @@ html {
   border: none;
   border-radius: 10px;
   padding: 10px;
+  cursor: pointer;
+}
+
+#navigate_table_btns {
+  display: flex;
+  align-items: center;
+  height: 30px;
+  width: 100%;
+  justify-content: space-between;
+  margin-bottom: 25px;
 }

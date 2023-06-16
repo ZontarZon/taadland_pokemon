@@ -4,12 +4,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'gatsby';
 import { useEffect, useRef, useState } from 'react';
 import './PokemonTable.scss';
-const PokemonRow = (props: { id: number; name: string; url: string }) => {
+const PokemonRow = (props: { name: string; url: string }) => {
   const [sprite, setSprite] = useState<String>(``);
   const [types, setTypes] = useState<PokemonTyping>({
     primary: ``,
     secondary: ``,
   });
+  const [id, setId] = useState<number>(0);
 
   async function getSpriteBasicInfo() {
     const response = await fetch(props.url);
@@ -25,16 +26,18 @@ const PokemonRow = (props: { id: number; name: string; url: string }) => {
         secondary: results.types[1] ? `, ${results.types[1].type.name}` : ``,
       });
     }
+
+    if (results.id) setId(results.id);
   }
 
   useEffect(() => {
     getSpriteBasicInfo();
-  }, []);
+  }, [props.name]);
 
   return (
     <div className="pokemon_table_entry_container">
       <div className="pokemon_table_entry_data">
-        <div>{props.id}</div>
+        <div className="pokemon_id">{id}</div>
         <div className="pokemon_name">{props.name}</div>
         <div className="pokemon_typing_container">
           {types.primary}
@@ -50,7 +53,7 @@ const PokemonRow = (props: { id: number; name: string; url: string }) => {
         )}
       </div>
       <Link className="link_button" to={`pokemon/${props.name}/`}>
-        View more... <FontAwesomeIcon icon={faArrowRight} />
+        View more <FontAwesomeIcon icon={faArrowRight} />
       </Link>
     </div>
   );
@@ -91,23 +94,16 @@ const PokemonTable = (props: { tableData: PokemonTableData }) => {
     <div>
       <div id={`hr_fixed_${HrFixed}`}>
         <div id="pokemon_list_hr" ref={TableHrRef}>
-          <div>Id</div>
+          <div className="pokemon_id">Id</div>
+
           <div className="pokemon_name">Name</div>
           <div className="pokemon_typing_container">Types</div>
-
           <div>Sprite</div>
         </div>
       </div>
 
       {props.tableData.results.map((value, index) => {
-        return (
-          <PokemonRow
-            key={index}
-            id={index}
-            name={value.name}
-            url={value.url}
-          />
-        );
+        return <PokemonRow key={index} name={value.name} url={value.url} />;
       })}
     </div>
   );
