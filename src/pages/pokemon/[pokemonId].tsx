@@ -126,6 +126,7 @@ const PokemonInfo = (props: { params: { pokemonId: number | string } }) => {
       .catch((error) => {
         setLoading(false);
         setError(error);
+        console.log(error);
       });
   }, []);
 
@@ -169,7 +170,7 @@ const PokemonInfo = (props: { params: { pokemonId: number | string } }) => {
             </div>
           </div>
 
-          <PokemonStatsChart pokemonData={pokemonData} />
+          {!loading && <PokemonStatsChart pokemonData={pokemonData} />}
           <div className="info_container">
             <div className="move_row_hr">
               <p>Move Name</p>
@@ -177,7 +178,6 @@ const PokemonInfo = (props: { params: { pokemonId: number | string } }) => {
               <p>Method</p>
             </div>
             {pokemonData.moves.map((value, id) => {
-              console.log(value);
               return (
                 <div className="move_row" key={id}>
                   <p>{value.move.name}</p>

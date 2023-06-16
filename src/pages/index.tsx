@@ -45,6 +45,7 @@ const App = () => {
       .catch((error) => {
         setLoading(false);
         setError(error);
+        console.log(error);
       });
   };
 
@@ -71,7 +72,6 @@ const App = () => {
         return -1;
       });
     }
-    console.log(`newTableData`, newTableData);
     setTableData({ ...tableData, results: newTableData });
   };
 
@@ -101,13 +101,14 @@ const App = () => {
                 <Select
                   labelId="demo-simple-select-helper-label"
                   label="Age"
+                  defaultValue={``}
                   onChange={(e) => {
                     if (e.target.value === `Ascending`) sortByName(true);
                     else if (e.target.value === `Descending`) sortByName(false);
                     else fetchNewTableData(false, false);
                   }}
                 >
-                  <MenuItem value={``}>Reset</MenuItem>
+                  <MenuItem value="">Reset</MenuItem>
                   <MenuItem value={`Ascending`}>Ascending</MenuItem>
                   <MenuItem value={`Descending`}>Descending</MenuItem>
                 </Select>

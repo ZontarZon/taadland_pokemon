@@ -1,9 +1,9 @@
 {
-  "name": "gatsby-starter-ts",
-  "description": "A TypeScript starter for Gatsby that includes all you need to build amazing projects",
+  "name": "totos-pokedex",
+  "description": "A PWA to look up pokemon and view their information",
   "version": "1.0.0",
   "private": true,
-  "author": "João Pedro Schmitz <hey@joaopedro.dev> (https://joaopedro.dev)",
+  "author": "Thorya Aadland <thoryagudrun@gmail.com> (https://taadland.net)",
   "license": "MIT",
   "keywords": [
     "gatsby",
@@ -66,6 +66,7 @@
     "@vitejs/plugin-react": "4.0.0",
     "babel-preset-gatsby": "3.9.0",
     "c8": "7.13.0",
+    "canvas": "2.11.2",
     "eslint": "8.40.0",
     "eslint-config-prettier": "8.8.0",
     "eslint-config-standard": "17.0.0",

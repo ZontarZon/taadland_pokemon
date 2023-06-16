@@ -1,6 +1,6 @@
-import { defineConfig } from 'vitest/config';
-import tsconfigPaths from 'vite-tsconfig-paths';
 import react from '@vitejs/plugin-react';
+import tsconfigPaths from 'vite-tsconfig-paths';
+import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
   plugins: [tsconfigPaths(), react()],
@@ -8,6 +8,7 @@ export default defineConfig({
     globals: true,
     setupFiles: `./vitest-setup.ts`,
     environment: `jsdom`,
+    threads: false,
     include: [`src/**/*.{spec,test}.{ts,tsx}`],
     coverage: {
       reporter: [`text`, `json`, `html`],
