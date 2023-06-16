@@ -1,9 +1,15 @@
-import { render, waitFor } from '@testing-library/react';
-import { describe, expect, it } from 'vitest';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { beforeEach, describe, expect, test } from 'vitest';
 import App from './index';
 describe(`index`, () => {
-  it(`renders the indexPage without crashing`, () => {
-    const indexPage = render(<App />);
-    waitFor(() => expect(indexPage).toBeInTheDocument());
+  beforeEach(async () => {
+    const indexPage = await waitFor(() => render(<App />));
+    expect(await indexPage).toBeTruthy();
+  });
+  test(`clicking the next button`, async () => {
+    const nextBtn = screen.getByText(`Next Page`);
+    fireEvent.click(nextBtn);
+    const viewMoreBtn = await waitFor(() => screen.getByText(`View more`));
+    expect(viewMoreBtn).toBeTruthy();
   });
 });

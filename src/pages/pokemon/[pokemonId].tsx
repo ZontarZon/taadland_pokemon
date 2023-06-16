@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react';
 import './pokemon.scss';
 
 /**
- * PokemonInfo
+ * PokemonInfo contains all the page information for a single pokemon.
  * @param props PokemonID, the integer of the pokemon's id.
  * @returns {html} A pokedex entry for the pokemon
  */
@@ -115,7 +115,10 @@ const PokemonInfo = (props: { params: { pokemonId: number | string } }) => {
     weight: 0,
   });
 
-  useEffect(() => {
+  /**
+   * Fetches all information on one pokemon.
+   */
+  const fetchPokemonWholeData = () => {
     setLoading(true);
     fetch(`https://pokeapi.co/api/v2/pokemon/${props.params.pokemonId}/`)
       .then((res) => res.json())
@@ -128,6 +131,10 @@ const PokemonInfo = (props: { params: { pokemonId: number | string } }) => {
         setError(error);
         console.log(error);
       });
+  };
+
+  useEffect(() => {
+    fetchPokemonWholeData();
   }, []);
 
   return (
@@ -146,6 +153,7 @@ const PokemonInfo = (props: { params: { pokemonId: number | string } }) => {
         </div>
       ) : (
         <div id="pokemon_info_body">
+          {/* First container: name, id, weight, height. */}
           <div id="basic_info_container" className="info_container">
             <div>
               <h2 id="pokemon_name">{pokemonData.name}</h2>
@@ -169,8 +177,9 @@ const PokemonInfo = (props: { params: { pokemonId: number | string } }) => {
               />
             </div>
           </div>
-
+          {/* Bar chart container */}
           {!loading && <PokemonStatsChart pokemonData={pokemonData} />}
+          {/* Moves list container */}
           <div className="info_container">
             <div className="move_row_hr">
               <p>Move Name</p>

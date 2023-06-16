@@ -75,6 +75,7 @@ const App = () => {
     setTableData({ ...tableData, results: newTableData });
   };
 
+  /* Do not want rerender for sorting; it will reset the table. */
   useEffect(() => {
     fetchNewTableData(false, false);
   }, [limitPerPage]);
@@ -83,80 +84,82 @@ const App = () => {
     <div>
       <Header />
       <main>
-        {loading ? (
-          <div>Loading...</div>
-        ) : error.message ? (
-          <div>
-            An error occurred. Please try again later.
-            <br />
-            {error.message}
-          </div>
-        ) : (
-          <div>
-            <div id="navigate_table_btns">
-              <FormControl sx={{ m: 1, minWidth: 150 }}>
-                <InputLabel id="demo-simple-select-helper-label">
-                  Sort Names...
-                </InputLabel>
-                <Select
-                  labelId="demo-simple-select-helper-label"
-                  label="Age"
-                  defaultValue={``}
-                  onChange={(e) => {
-                    if (e.target.value === `Ascending`) sortByName(true);
-                    else if (e.target.value === `Descending`) sortByName(false);
-                    else fetchNewTableData(false, false);
-                  }}
-                >
-                  <MenuItem value="">Reset</MenuItem>
-                  <MenuItem value={`Ascending`}>Ascending</MenuItem>
-                  <MenuItem value={`Descending`}>Descending</MenuItem>
-                </Select>
-              </FormControl>
+        <div>
+          {/* Navigation and filter inputs */}
+          <div id="navigate_table_btns">
+            <FormControl sx={{ m: 1, minWidth: 150 }}>
+              <InputLabel id="demo-simple-select-helper-label">
+                Sort Names...
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-helper-label"
+                label="Age"
+                defaultValue={``}
+                onChange={(e) => {
+                  if (e.target.value === `Ascending`) sortByName(true);
+                  else if (e.target.value === `Descending`) sortByName(false);
+                  else fetchNewTableData(false, false);
+                }}
+              >
+                <MenuItem value="">Reset</MenuItem>
+                <MenuItem value={`Ascending`}>Ascending</MenuItem>
+                <MenuItem value={`Descending`}>Descending</MenuItem>
+              </Select>
+            </FormControl>
 
-              <FormControl sx={{ m: 1, minWidth: 120 }}>
-                <InputLabel id="demo-simple-select-helper-label">
-                  Results per page
-                </InputLabel>
-                <Select
-                  labelId="demo-simple-select-helper-label"
-                  value={limitPerPage}
-                  label="Age"
-                  onChange={(e) => setLimitPerPage(e.target.value)}
-                >
-                  <MenuItem value="">
-                    <em>None</em>
-                  </MenuItem>
-                  <MenuItem value={5}>5</MenuItem>
-                  <MenuItem value={10}>10</MenuItem>
-                  <MenuItem value={20}>20</MenuItem>
-                  <MenuItem value={50}>50</MenuItem>
-                </Select>
-              </FormControl>
-              <button
-                className="link_button"
-                onClick={() => {
-                  if (tableData && tableData.next) {
-                    fetchNewTableData(false, true);
-                  }
-                }}
+            <FormControl sx={{ m: 1, minWidth: 120 }}>
+              <InputLabel id="demo-simple-select-helper-label">
+                Results per page
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-helper-label"
+                value={limitPerPage}
+                label="Age"
+                onChange={(e) => setLimitPerPage(e.target.value)}
               >
-                <FontAwesomeIcon icon={faArrowLeft} /> Previous Page
-              </button>
-              <button
-                className="link_button"
-                onClick={() => {
-                  if (tableData && tableData.next) {
-                    fetchNewTableData(true, false);
-                  }
-                }}
-              >
-                Next Page <FontAwesomeIcon icon={faArrowRight} />
-              </button>
-            </div>
-            <PokemonTable tableData={tableData} />
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                <MenuItem value={5}>5</MenuItem>
+                <MenuItem value={10}>10</MenuItem>
+                <MenuItem value={20}>20</MenuItem>
+                <MenuItem value={50}>50</MenuItem>
+              </Select>
+            </FormControl>
+            <button
+              className="link_button"
+              onClick={() => {
+                if (tableData && tableData.next) {
+                  fetchNewTableData(false, true);
+                }
+              }}
+            >
+              <FontAwesomeIcon icon={faArrowLeft} /> Previous Page
+            </button>
+            <button
+              className="link_button"
+              onClick={() => {
+                if (tableData && tableData.next) {
+                  fetchNewTableData(true, false);
+                }
+              }}
+            >
+              Next Page <FontAwesomeIcon icon={faArrowRight} />
+            </button>
           </div>
-        )}
+          {/* Loads the pokemon table, loading, or error message */}
+          {loading ? (
+            <div style={{ textAlign: `center` }}>Loading...</div>
+          ) : error.message ? (
+            <div>
+              An error occurred. Please try again later.
+              <br />
+              {error.message}
+            </div>
+          ) : (
+            <PokemonTable tableData={tableData} />
+          )}
+        </div>
       </main>
       <Footer />
     </div>

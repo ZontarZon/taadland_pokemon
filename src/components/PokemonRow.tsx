@@ -21,17 +21,23 @@ const PokemonRow = (props: { name: string; url: string }) => {
   });
   const [id, setId] = useState<number>(0);
 
-  useEffect(() => {
+  /**
+   * fetchDataForRow will set the sprite url, types, and the id. Triggered
+   * on load and with name changes.
+   */
+  const fetchDataForRow = () => {
     setLoading(true);
     fetch(props.url)
       .then((res) => res.json())
       .then((results) => {
         setLoading(false);
         setSprite(results.sprites.front_default);
+
         setTypes({
           primary: results.types[0].type.name,
           secondary: results.types[1] ? `, ${results.types[1].type.name}` : ``,
         });
+
         if (results.id) setId(results.id);
       })
       .catch((error) => {
@@ -39,6 +45,10 @@ const PokemonRow = (props: { name: string; url: string }) => {
         setError(error);
         console.log(error);
       });
+  };
+
+  useEffect(() => {
+    fetchDataForRow();
   }, [props.name]);
 
   return (
@@ -49,6 +59,7 @@ const PokemonRow = (props: { name: string; url: string }) => {
         <div>{error.message}</div>
       ) : (
         <div>
+          {/* Row for a pokemon result on the index page table */}
           <div className="pokemon_table_entry_data">
             <div className="pokemon_id">{id}</div>
             <div className="pokemon_name">{props.name}</div>
@@ -65,7 +76,10 @@ const PokemonRow = (props: { name: string; url: string }) => {
               />
             )}
           </div>
-          <Link className="link_button" to={`pokemon/${props.name}/`}>
+          <Link
+            className="link_button view_more_btn"
+            to={`pokemon/${props.name}/`}
+          >
             View more <FontAwesomeIcon icon={faArrowRight} />
           </Link>
         </div>

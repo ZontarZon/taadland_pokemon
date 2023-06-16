@@ -1,8 +1,7 @@
 import { PokemonTableData } from '@/interfaces/Interfaces';
 import { useEffect, useRef, useState } from 'react';
-import './PokemonTable.scss';
-
 import PokemonRow from './PokemonRow';
+import './PokemonTable.scss';
 
 /**
  * PokemonTable: Creates a row for each pokemon fetched from the API.
@@ -42,7 +41,7 @@ const PokemonTable = (props: { tableData: PokemonTableData }) => {
   if (!props.tableData) return <div>Null val</div>;
 
   return (
-    <div>
+    <div id="pokemon_table">
       <div id={`hr_fixed_${HrFixed}`}>
         <div id="pokemon_list_hr" ref={TableHrRef}>
           <div className="pokemon_id">Id</div>

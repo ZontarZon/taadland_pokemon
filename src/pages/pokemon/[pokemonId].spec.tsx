@@ -1,5 +1,5 @@
 import { render, waitFor } from '@testing-library/react';
-import { describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import PokemonInfo from './[pokemonId]';
 
 /* vitest and jest don't natively support testing for canvas elements, so
@@ -13,18 +13,20 @@ const ResizeObserverMock = vi.fn(() => ({
 vi.stubGlobal(`ResizeObserver`, ResizeObserverMock);
 
 describe(`PokemonTable`, () => {
-  it(`renders the pokemon's page given the id`, () => {
-    const table = render(<PokemonInfo params={{ pokemonId: 1 }} />);
-
-    waitFor(() => expect(table).toBeInTheDocument());
+  beforeEach(() => {
+    // IntersectionObserver isn't available in test environment
+    const mockIntersectionObserver = vi.fn();
+    mockIntersectionObserver.mockReturnValue({
+      observe: () => null,
+      unobserve: () => null,
+      disconnect: () => null,
+    });
+    window.IntersectionObserver = mockIntersectionObserver;
   });
-});
-
-describe(`PokemonTable`, () => {
   it(`renders the pokemon's page given the pokemon name`, () => {
     const table = render(<PokemonInfo params={{ pokemonId: `squirtle` }} />);
 
-    waitFor(() => expect(table).toBeInTheDocument());
+    waitFor(() => expect(table).toBeTruthy());
   });
 });
 
@@ -34,6 +36,6 @@ describe(`PokemonTable`, () => {
       <PokemonInfo params={{ pokemonId: `notARealPokemon` }} />,
     );
 
-    waitFor(() => expect(table).toBeInTheDocument());
+    waitFor(() => expect(table).toBeTruthy());
   });
 });

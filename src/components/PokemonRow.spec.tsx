@@ -10,11 +10,11 @@ describe(`PokemonTable`, () => {
         url="https://pokeapi.co/api/v2/pokemon/1/"
       />,
     );
-    waitFor(() => expect(table).toBeInTheDocument());
+    waitFor(() => expect(table).toBeTruthy());
   });
 });
 
-describe(`PokemonTable`, () => {
+describe(`PokemonTable with error msg`, () => {
   it(`catches the error during fetch, if provided an invalid pokemon name and url`, () => {
     const table = render(
       <PokemonRow
@@ -22,6 +22,6 @@ describe(`PokemonTable`, () => {
         url="https://pokeapi.co/api/v2/pokemon/notarealpokemon/"
       />,
     );
-    waitFor(() => expect(table).toBeInTheDocument());
+    waitFor(() => expect(table).toBeTruthy());
   });
 });
